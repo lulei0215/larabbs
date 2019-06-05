@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Requests\Api\VerificationCodeRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Overtrue\EasySms\EasySms;
 
 
 class VerificationCodesController extends Controller
@@ -13,18 +12,6 @@ class VerificationCodesController extends Controller
 
     public function store(VerificationCodeRequest $request)
     {
-//        $phone = $request->phone;
-//        $code = rand(1000,9999);
-//        $sms = new SMS();
-//        $re = $sms->send_verify($phone,$code);
-//        if($re['Code'] == 'OK'){
-//            $key = 'verificationCode_'.str_random(15);
-//            \Cache::put($key,['phone' => $phone, 'code' => $code],60);
-//            return ['code'=>'200','message'=>'发送成功','data'=>['key'=>$key,'code'=>$code,'expired_at'=>60]];
-//        }else{
-//            return ['code'=>'400','message'=>'发送失败请重试'];
-//        }
-//
 
         $captchaData = \Cache::get($request->captcha_key);
 
@@ -40,33 +27,28 @@ class VerificationCodesController extends Controller
 
         $phone = $captchaData['phone'];
 
-//        $phone = $request->phone;
-        $code = rand(1000,9999);
+        $code = rand(1000, 9999);
         $sms = new SMS();
-        $re = $sms->send_verify($phone,$code);
-        if($re['Code'] == 'OK'){
+        $re = $sms->send_verify($phone, $code);
+        if ($re['Code'] == 'OK') {
 
-            $key = 'verificationCode_'.str_random(15);
+            $key = 'verificationCode_' . str_random(15);
             $expiredAt = now()->addMinutes(10);
             // 缓存验证码 10分钟过期。
             \Cache::put($key, ['phone' => $phone, 'code' => $code], 60);
             // 清除图片验证码缓存
             \Cache::forget($request->captcha_key);
 
-            return ['code'=>'200','message'=>'发送成功','data'=>['key'=>$key,'code'=>$code,'expired_at'=>60]];
-        }else{
-            return ['code'=>'400','message'=>'发送失败请重试'];
+            return ['code' => '200', 'message' => '发送成功', 'data' => ['key' => $key, 'code' => $code, 'expired_at' => 60]];
+        } else {
+            return ['code' => '400', 'message' => '发送失败请重试'];
         }
-
-
     }
 
-
-
-
-
 }
-class SMS{
+
+class SMS
+{
     // 保存错误信息
 
     public function __construct($cofig = array())
