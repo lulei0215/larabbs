@@ -6,6 +6,7 @@
     "type": "project",
     "require": {
         "php": ">=7.0.0",
+        "dingo/api": "2.0.0-beta1",
         "fideloper/proxy": "~4.0",
         "guzzlehttp/guzzle": "~6.3",
         "hieu-le/active": "~3.5",
@@ -65,6 +66,12 @@
     "config": {
         "preferred-install": "dist",
         "sort-packages": true,
-        "optimize-autoloader": true
-    }
+        "optimize-autoloader": true,
+        "platform": {
+            "ext-pcntl": "7.2",
+            "ext-posix": "7.2"
+        }
+    },
+    "minimum-stability" : "dev",
+    "prefer-stable" : true
 }
