@@ -30,7 +30,7 @@ class UserController extends BaseController
             'phone' => $verifyData['phone'],
             'password' => bcrypt($request->password),
         ]);
-    
+
         // 清除验证码缓存
         \Cache::forget($request->verification_key);
 
