@@ -72,8 +72,8 @@ class SMS{
     public function __construct($cofig = array())
     {
         $cofig = array(
-            'accessKeyId' => 'LTAIB3W9wXEGHzzX',
-            'accessKeySecret' => 'Nu1BQJ00MwW5w7pN5AlnBMxxTfvJCn',
+            'accessKeyId' => config('api.accessKeyId'),
+            'accessKeySecret' => config('api.accessKeySecret'),
             'signName' => '卢磊blog',
             'templateCode' => 'SMS_10660199'
         );

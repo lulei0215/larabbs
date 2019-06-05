@@ -243,5 +243,8 @@ return [
             'limit'  => env('SIGN_RATE_LIMITS', 10),
         ],
     ],
+    'accessKeyId'=>env('ALI_KEY'),
+    'accessKeySecret'=>env('ALI_SECRET'),
+
 
 ];
