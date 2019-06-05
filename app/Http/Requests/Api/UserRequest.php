@@ -23,4 +23,14 @@ class UserRequest extends FormRequest
             'verification_code' => '短信验证码',
         ];
     }
+    public function returnArray($result = '', $message = '成功', $code = 200)
+    {
+        $res = [
+            'message'     => $message,
+            'status_code' => $code,
+            'data'        => $result
+        ];
+        return  response()->json($res ,$code);
+
+    }
 }

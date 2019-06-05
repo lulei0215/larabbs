@@ -19,7 +19,7 @@ class VerificationCodesController extends Controller
         if($re['Code'] == 'OK'){
             $key = 'verificationCode_'.str_random(15);
             \Cache::put($key,['phone' => $phone, 'code' => $code],60);
-            return ['code'=>'200','message'=>'发送成功','data'=>['key'=>$key,'expired_at'=>60]];
+            return ['code'=>'200','message'=>'发送成功','data'=>['key'=>$key,'code'=>$code,'expired_at'=>60]];
         }else{
             return ['code'=>'400','message'=>'发送失败请重试'];
         }
