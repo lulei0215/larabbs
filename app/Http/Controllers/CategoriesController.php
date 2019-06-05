@@ -24,4 +24,7 @@ class CategoriesController extends Controller
         // 传参变量到模板中
         return view('topics.index', compact('topics', 'category', 'active_users', 'links'));
     }
+    public function index(){
+        return 1;
+    }
 }
