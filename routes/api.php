@@ -33,7 +33,10 @@ $api->version('v1', [
 
     });
     // 图片验证码
-    $api->post('captchas', 'CaptchasController@store')
-        ->name('api.captchas.store');
+    $api->post('captchas', 'CaptchasController@store')->name('api.captchas.store');
+    $api->get('demo', 'CaptchasController@demo')->name('api.demo.store');
+    // 游客可以访问的接口
+    $api->get('categories', 'CategoriesController@index')
+        ->name('api.categories.index');
 });
 

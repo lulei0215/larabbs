@@ -6,7 +6,7 @@ use App\Http\Requests\Api\CaptchaRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Gregwar\Captcha\CaptchaBuilder;
-
+use GuzzleHttp\Client;
 class CaptchasController extends Controller
 {
     public function store(CaptchaRequest $request, CaptchaBuilder $captchaBuilder)
@@ -23,7 +23,17 @@ class CaptchasController extends Controller
             'expired_at' => $expiredAt->toDateTimeString(),
             'captcha_image_content' => $captcha->inline()
         ];
-        return $result;
         return $this->response->array($result)->setStatusCode(201);
+    }
+    public function demo(){
+
+        $api = "https://free-ss.site/";
+        $http = new Client();
+
+        //$data = ['apiUser' => $request->apiUser, 'apiEnc' => $apiEnc, 'token' => $request->token];
+        $response = $http->request('GET', $api,[]);
+        $result = json_decode($response->getBody()->getContents(), true);
+        return $result;
+
     }
 }
